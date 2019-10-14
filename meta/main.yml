@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  role_name: omsagentwindows
+  author: Sven de Windt
+  company: RunIt
+  description: Installs the Microsoft monitoring agent
+  license: BSD
+  min_ansible_version: 2.4
+  platforms:
+  - name: EL
+    versions::
+    - 7
+  galaxy_tags:
+  - microsoft
+  - cloud
+  - oms
+  - monitoring
+dependencies: []

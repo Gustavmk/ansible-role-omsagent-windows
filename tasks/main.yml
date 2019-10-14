@@ -1,0 +1,17 @@
+---
+# tasks file for svendewindt.omsagentwindows
+
+- name: Install x64 version of Monitoring agent
+  win_package:
+    path: "{{ url_omsagent }}"
+    product_id: "{{ omsagent_productid }}"
+    arguments: '"/C:setup.exe /qn ADD_OPINSIGHTS_WORKSPACE=1 OPINSIGHTS_WORKSPACE_ID={{ workspace_id }} OPINSIGHTS_WORKSPACE_KEY= {{ workspace_key}} AcceptEndUserLicenseAgreement=1"'
+    state: present
+
+- name: Install dependency agent
+  win_package:
+    path: "{{ url_dependencyagent }}"
+    product_id: "{{ dependencyagent_productid }}"
+    arguments: '/S /AcceptEndUserLicenseAgreement:1'
+    state: present
+
