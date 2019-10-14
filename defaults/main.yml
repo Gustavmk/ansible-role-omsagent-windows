@@ -7,4 +7,3 @@ omsagent_productid: '{E387F779-C574-4252-8B91-009CE5648A46}'
 install_dependencyagent: True
 url_dependencyagent: 'https://aka.ms/dependencyagentwindows'
 dependencyagent_productid: 'DependencyAgent'
-
