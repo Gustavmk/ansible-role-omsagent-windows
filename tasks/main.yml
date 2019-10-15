@@ -8,16 +8,12 @@
   failed_when: service_installed is not defined
   ignore_errors: yes
 
-- name: Debug architecture
-  debug:
-    msg: "Architecture:{{ ansible_architecture }}"
-
 - name: Windows 32-bit block
   block:
   - name: Download OMS agent 32-bit
     win_get_url:
       url: '{{ url_omsagentx32 }}'
-      dest: '{{ ansible_env.TEMP }}\MMASetup.exe'
+      dest: '{{ ansible_env.TEMP }}\{{ MMAInstallerName }}'
     when: service_installed.state is not defined or service_installed.name is not defined
   when: ansible_architecture == "32-bit"
   
@@ -26,17 +22,17 @@
   - name: Download OMS agent 64-bit
     win_get_url:
       url: '{{ url_omsagentx64 }}'
-      dest: '{{ ansible_env.TEMP }}\MMASetup.exe'
+      dest: '{{ ansible_env.TEMP }}\{{ MMAInstallerName }}'
     when: service_installed.state is not defined or service_installed.name is not defined
   when: ansible_architecture == "64-bit"
 
 - name: Install OMS agent
-  win_command: '{{ ansible_env.TEMP }}\MMASetup.exe /Q:A /R:N /C:"setup.exe /qn ADD_OPINSIGHTS_WORKSPACE=1 OPINSIGHTS_WORKSPACE_ID={{ workspace_id }} OPINSIGHTS_WORKSPACE_KEY={{ workspace_key }} AcceptEndUserLicenseAgreement=1"'
+  win_command: '{{ ansible_env.TEMP }}\{{ MMAInstallerName }} /Q:A /R:N /C:"setup.exe /qn ADD_OPINSIGHTS_WORKSPACE=1 OPINSIGHTS_WORKSPACE_ID={{ workspace_id }} OPINSIGHTS_WORKSPACE_KEY={{ workspace_key }} AcceptEndUserLicenseAgreement=1"'
   when: service_installed.state is not defined or service_installed.name is not defined
 
 - name: Remove the OMS Installer file
   win_file:
-    path: '{{ ansible_env.TEMP }}\MMASetup.exe'
+    path: '{{ ansible_env.TEMP }}\{{ MMAInstallerName }}'
     state: absent
   when: service_installed.state is not defined or service_installed.name is not defined
 
