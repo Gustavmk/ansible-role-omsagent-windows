@@ -9,7 +9,7 @@
   ignore_errors: yes
 
 - debug:
-   msg: '{{ service_installed}}'
+   msg: '{{ service_installed }}'
 
 - name: Windows 32-bit block
   block:
