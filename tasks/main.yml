@@ -8,8 +8,8 @@
   failed_when: service_installed is not defined
   ignore_errors: yes
 
-#- debug:
-#   msg: '{{ service_installed}}'
+- debug:
+   msg: '{{ service_installed}}'
 
 - name: Windows 32-bit block
   block:
@@ -39,11 +39,13 @@
   win_shell: '{{ ansible_env.TEMP }}\Get-SoftwareGuid.ps1'
   register: output
   when: purge_oms_config and service_installed.exists
+#  ignore_errors: yes
 
 - name: Process output from Powershell script
   set_fact:
     psoutput: '{{ output.stdout | from_json }}'
   when: purge_oms_config and service_installed.exists
+#  ignore_errors: yes
 
 #- debug:
 #    msg: Guid is {{ psoutput.guid }}

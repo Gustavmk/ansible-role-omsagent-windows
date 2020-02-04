@@ -14,6 +14,7 @@ To make use of the agents, you need a configured OMS workspace. You need a `work
 | ---                       | ---     | ---                                                                            |
 | `workspace_id`            | -       | Required. The workspace ID                                                     |
 | `workspace_key`           | -       | Required. The workspace Key                                                    |
+| `purge_oms_config: False` | `False` | Removes the Log Analytics agent and Installs the Log Analytics agent	       |
 | `install_dependencyagent` | `True`  | Optional. Whether to install the dependency agent, False will remove the agent |
 
 ## Dependencies
